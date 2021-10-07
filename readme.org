@@ -12,13 +12,13 @@
    
 ** Matériel
 
-- Assortiment de fils : https://www.lextronic.fr/assortiment-fils-de-cablage-monobrin-30m-62595.html
-- Perfboard : https://www.lextronic.fr/plaque-a-pastilles-cuivrees-81x51-mm-31761.html
-- Condensateur 100 µF https://www.lextronic.fr/condensateur-chimique-radial-1000uf-35v-58165.html#/condensateurs_85-100f_10v
-- Embase 5v : https://www.lextronic.fr/embase-d-alimentation-2-1x5-5mm-2529.html
+- Assortiment de fils : <https://www.lextronic.fr/assortiment-fils-de-cablage-monobrin-30m-62595.html>
+- Perfboard : <https://www.lextronic.fr/plaque-a-pastilles-cuivrees-81x51-mm-31761.html>
+- Condensateur 100 µF <https://www.lextronic.fr/condensateur-chimique-radial-1000uf-35v-58165.html#/condensateurs_85-100f_10v>
+- Embase 5v : <https://www.lextronic.fr/embase-d-alimentation-2-1x5-5mm-2529.html>
 - Embase DIN : me souviens plus
 - Alimentation : 5v 2a (chez RS Composants)
-- Servo moteur MG996R : https://www.miniplanes.fr/servos/tower-pro/mg-996-servo-numerique-pignons-metaux-10kgcm-tower-pro-p-19942.html
+- Servo moteur MG996R : <https://www.miniplanes.fr/servos/tower-pro/mg-996-servo-numerique-pignons-metaux-10kgcm-tower-pro-p-19942.html>
 - Résistance 220 ohms + 4.7kohms
-- Diode : 1n914 ou 1n4148 https://composant-electronique.fr/diode-1n4148
-- Optocoupleur 6n138 : https://composant-electronique.fr/optocoupleur-6n138
+- Diode : 1n914 ou 1n4148 <https://composant-electronique.fr/diode-1n4148>
+- Optocoupleur 6n138 : <https://composant-electronique.fr/optocoupleur-6n138>
