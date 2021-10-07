@@ -1,5 +1,15 @@
 * Robobatteur
-
+** Principes
+   //
+** Circuit
+   //
+** Menuiserie
+   //
+** Fichiers MIDI
+   //
+** Setup informatique
+   QJackCtl + a2jmidid + Rosegarden
+   
 ** Matériel
 
 - Assortiment de fils : https://www.lextronic.fr/assortiment-fils-de-cablage-monobrin-30m-62595.html
@@ -12,4 +22,3 @@
 - Résistance 220 ohms + 4.7kohms
 - Diode : 1n914 ou 1n4148 https://composant-electronique.fr/diode-1n4148
 - Optocoupleur 6n138 : https://composant-electronique.fr/optocoupleur-6n138
-
