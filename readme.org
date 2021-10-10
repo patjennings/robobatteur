@@ -5,8 +5,8 @@
    La principale évolution sera de pouvoir contrôler le robot à partir d'une séquence midi. Un séquenceur MIDI jouera une partition, et enverra à mesure qu'elle joue des messages aux moteurs. Voici le schéma de principe : sur la ligne du haut, les éléments par lesquels le message passe, sur celle du bas, le message
 
    #+begin_src text
-	--- Ordi -- | - Midi out (carte son) -- | -- Midi in (circuit) --> carte Arduino -------------------- circuit -- servo moteur
-	Note MIDI -------------------------------------------------------> routage / instructions de frappe -----------> frappe
+Ordi -------> Midi out (carte son) --> Midi in (circuit) --> carte Arduino -------------------> circuit --> servomoteur
+Note MIDI -------------------------------------------------> routage / instructions de frappe ------------> frappe
    #+end_src
 
    
