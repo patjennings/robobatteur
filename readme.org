@@ -2,11 +2,16 @@
 ** Principes
    Suite au travail sur la première version du robobatteur, qui effectuait un simple "poum-tchac", j'ai réfléchi à une version plus évoluée.
 
-   La principale évolution sera de pouvoir contrôler le robot à partir d'une séquence midi. Un séquenceur MIDI jouera une partition, et enverra à mesure qu'elle joue des messages aux moteurs
+   La principale évolution sera de pouvoir contrôler le robot à partir d'une séquence midi. Un séquenceur MIDI jouera une partition, et enverra à mesure qu'elle joue des messages aux moteurs. Voici le schéma de principe : sur la ligne du haut, les éléments par lesquels le message passe, sur celle du bas, le message
 
+   #+begin_src text
+	--- Ordi -- | - Midi out (carte son) -- | -- Midi in (circuit) --> carte Arduino -------------------- circuit -- servo moteur
+	Note MIDI -------------------------------------------------------> routage / instructions de frappe -----------> frappe
+   #+end_src
+
+   
    Cela engendre une autre modification sur la machine, afin de pouvoir assurer la frappe sur des tempos élevés. 2 moteurs par élément, qui farppent alternativement.
    
-   Note MIDI > Midi In > instructions servo moteur > frappe
 
    Chaque note correspond à un élément. La note 30 (Do 1) correspond à la grosse caisse, la note 32 à la caisse claire, etc. Les notes sont récapitulées dans le tableau ci-dessous.
 
