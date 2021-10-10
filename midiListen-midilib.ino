@@ -2,15 +2,15 @@
 #include <Servo.h> // Add servo lib
 
 #define LED 13    // Arduino Board LED is on Pin 13
-Servo srvKick1, srvKick2, srvSnare1, srvSnare2, srvHh1, srvHh2, srvMisc1, srvMisc2;  // on crée les servos
+Servo srvKick1, srvKick2, srvSnare1, srvSnare2, srvHh1, srvHh2, srvRide1, srvRide2;  // on crée les servos
 int initPos[] = {160, 160, 95, 101, 45, 43, 85, 85}; // position initiale des servos, dans l'ordre de déclaration présent ci-avant
 
-int rotationAngle = 45; // coefficient de rotation#1
+int rotationAngle = 45; // coefficient de rotation
 
-//int initPos[] = {70, 70, 95, 98, 75, 70, 85, 85}; // test hh remplace kick
 boolean toggleSnare = true;
 boolean toggleHH = true;
 boolean toggleKick = true;
+boolean toggleRide = true;
 
 MIDI_CREATE_DEFAULT_INSTANCE();
 
@@ -43,13 +43,12 @@ void setup() {
   srvHh2.attach(6); // hh 2
   srvHh2.write(initPos[5]);
 
-  // sortie 7 
-  srvMisc1.attach(5); // misc 1
-  srvMisc1.write(initPos[6]);
+  // sortie 7 & 8
+  srvRide1.attach(5); // misc 1
+  srvRide1.write(initPos[6]);
 
-  // sortie 8
-  srvMisc2.attach(4); // misc 2
-  srvMisc2.write(initPos[7]);
+  srvRide2.attach(4); // misc 2
+  srvRide2.write(initPos[7]);
 }
 
 void loop() { // Main loop
@@ -72,11 +71,8 @@ void MyHandleNoteOn(byte channel, byte pitch, byte velocity) {
   if(pitch == 42){  // FA#1
     hitHH();
   }
-  if(pitch == 49){ // DO#2
-    hitMisc1();
-  }
-  if(pitch == 51){ // RE#2
-    hitMisc2();
+  if(pitch == 43){ // SOL 1
+    hitRide();
   }
 }
 void hitKick(){
@@ -120,15 +116,18 @@ void hitHH(){
     toggleHH = true;
   }
 }
-void hitMisc1(){
-  srvMisc1.write(initPos[6]+rotationAngle); // la baguette s'abaisse
-  delay(40);
-  srvMisc1.write(initPos[6]);  // la baguette se relève
-}
-void hitMisc2(){
-  srvMisc2.write(initPos[7]+rotationAngle); // la baguette s'abaisse
-  delay(40);
-  srvMisc2.write(initPos[7]);  // la baguette se relève
+void hitRide(){
+  if(toggleRide == true){
+    srvRide1.write(initPos[4]+rotationAngle); // la baguette s'abaisse
+    delay(40);
+    srvRide1.write(initPos[4]);  // la baguette se relève
+    toggleRide = false;
+  } else {
+    srvRide2.write(initPos[5]+rotationAngle); // la baguette s'abaisse
+    delay(40);
+    srvRide2.write(initPos[5]);  // la baguette se relève
+    toggleRide = true;
+  }
 }
 void MyHandleNoteOff(byte channel, byte pitch, byte velocity) { 
   digitalWrite(LED,LOW);  //Turn LED off

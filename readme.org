@@ -1,14 +1,92 @@
 * Robobatteur
 ** Principes
-   //
+   Suite au travail sur la première version du robobatteur, qui effectuait un simple "poum-tchac", j'ai réfléchi à une version plus évoluée.
+
+   La principale évolution sera de pouvoir contrôler le robot à partir d'une séquence midi. Un séquenceur MIDI jouera une partition, et enverra à mesure qu'elle joue des messages aux moteurs
+
+   Cela engendre une autre modification sur la machine, afin de pouvoir assurer la frappe sur des tempos élevés. 2 moteurs par élément, qui farppent alternativement.
+   
+   Note MIDI > Midi In > instructions servo moteur > frappe
+
+   Chaque note correspond à un élément. La note 30 (Do 1) correspond à la grosse caisse, la note 32 à la caisse claire, etc. Les notes sont récapitulées dans le tableau ci-dessous.
+
+   J'ai prévu de pouvoir contrôler quatre éléments de batterie.
+   
+   | Note MIDI | Note | Élément |
+   |-----------+------+---------|
+   |        43 | G1   | Ride    |
+   |        42 | F1   | Hi-hat  |
+   |        38 | D1   | Snare   |
+   |        36 | C1   | Kick    |
+   
+   On s'appuie toujours sur une carte Arduino Uno pour effectuer ce travail.
+   
 ** Circuit
-   //
-** Menuiserie
-   //
+   Plusieurs besoins pour le circuit :
+   - un midi in
+   - une alimentation par groupe de servos dédiés (les servos ont besoin chacun d'une intensité d'un ampère pour fonctionner correctement. Comme il est difficile de se procurer du 5v 6a, pour pallier à cela, on n'alimente que deux moteurs avec une seule alim 5v à 2a).
+
+   J'ai utilisé une perfboard pour le circuit du module de MIDI In et pour le câblage des servo moteurs, et une autre board pour les circuits d'alim des servos. J'ai fait ça à mesure que j'avancais, j'imagine qu'il y a moyen d'optimiser ça.
+
+   Comme je l'ai mentionné plus haut, j'ai besoin de taper sur quatre éléments de batterie : j'aurai donc besoin de huit servomoteurs
+   
+** Menuiserie, disposition
+   Principe général. Tout sur un socle, qu'on peut lester avec des parpaings. La disposition reprend celle d'une batterie jouée par un humain, à savoir grosse caisse au milieu, et charleston et caisse claire de part et d'autre.
+   Mais on peut être plus ambitieux et disposer ses éléments dans l'espace : après tout, on est seulement limité par la longueur de câble
+   Bras dont on peut modifier la rotation, afin de pouvoir effectuer des ajustements fins, pour avoir une frappe assez sonore.
+   
+   Fixation des servos : baguette en pin (16mm), percé pour recevoir le moteur. Fixation avec des vis
+   Fixation des baguettes : perçage, puis fixation avec vis dans le bras de chaque servo
+   
+   Le circuit et la carte sont fixés dans une boîte, d'où partent les câbles vers les servos (8 groupe de 3 câbles ― phase, neutre, message arduino (?))
+
+   Les câbles sont fixés. C'est encore à l'état de prototype "early", et la robustesse de connexions est le prochain point que je compte améliorer.
+   
+** Code
+   Le code est relativement simple. Les variables sur lesquelles on jouera en fonction du montage sont dans initPos[]. L'angle de rotation de chaque baguette est défini par rotationAngle. On pourra peut-être jouer avec. J'ai peu testé, mais on gagne peut-être en puissance.
+
+   Le programme s'appuie sur les librairies Servo (lien) et MIDI (lien). Comment les télécharger ?
+
+   Le code se répète pas mal, et il pourrait aisément être factorisé. Cela est dû à mes compétences limitées. Malgré tout, le code est sûrement plus lisible pour des novices qui tâcheraient de comprendre ce qui se passe.
+   
 ** Fichiers MIDI
-   //
+   Les fichiers MIDI sont créés avec Rosegarden. J'ai pu tester avec des (croches, doubles-croches) à un tempo de (combien) ?
+   
 ** Setup informatique
    QJackCtl + a2jmidid + Rosegarden
+
+   J'utilise Linux Mint. Le setup sera à adapter en fonction de l'OS, et sera sûrement plus simple dans d'autres environnements. Quoi qu'il en soit, voici le mien :
+
+   Les applications utilisées sont :
+   - QJackCtl pour piloter la carte son et effectuer les connexions
+   - a2jmidid pour envoyer des messages MIDI via la carte son
+   - Rosegarden pour créer et lire les fichiers MIDI
+
+   #+begin_src bash
+     sudo apt-get update
+     sudo apt-get install -y qjackctl a2jmidid rosegarden
+   #+end_src
+   
+   Une carte son (Presonus Audibox44VSL pour ma part) est connectée en USB à l'ordinateur.
+   
+   Ensuite, QJackCtl est démarré. Si tout roule, on peut lancer a2jmidid, en ligne de commande
+
+   #+begin_src bash
+     a2jmidid -e
+   #+end_src
+
+   Si tout fonctionne, on doit voir quelque chose comme ça
+
+   Retour terminal
+
+   Puis on peut démarrer Rosegarden
+
+   Une fois que tout est démarré, on revient dans les connexions de Qjack pour vérifier que RoseGarden envoie des messages vers le midi out de la carte son (grâce à a2jmidid)
+
+   Si tout fonctionne correctement, une note lue sur Rosegarden doit activer les servo moteurs
+
+** Améliorer
+   Précision des fixations  : angle de fixation des baguettes et des servos aléatoires, ce qui nuit à l'exactitude du tempo (rubato).
    
 ** Matériel
 
