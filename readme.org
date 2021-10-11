@@ -33,7 +33,9 @@ Note MIDI -------------------------------------------------> routage / instructi
 
    J'ai utilisé une perfboard pour le circuit du module de MIDI In et pour le câblage des servo moteurs, et une autre board pour les circuits d'alim des servos. J'ai fait ça à mesure que j'avancais, j'imagine qu'il y a moyen d'optimiser ça.
 
-   Comme je l'ai mentionné plus haut, j'ai besoin de taper sur quatre éléments de batterie : j'aurai donc besoin de huit servomoteurs
+   Comme je l'ai mentionné plus haut, j'ai besoin de taper sur quatre éléments de batterie : j'aurai donc besoin de huit servomoteurs.
+
+   file:docs/robobatteur_bb.jpg
    
 ** Menuiserie, disposition
    Principe général. Tout sur un socle, qu'on peut lester avec des parpaings. La disposition reprend celle d'une batterie jouée par un humain, à savoir grosse caisse au milieu, et charleston et caisse claire de part et d'autre.
