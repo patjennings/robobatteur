@@ -35,7 +35,7 @@ Note MIDI -------------------------------------------------> routage / instructi
 
    Comme je l'ai mentionné plus haut, j'ai besoin de taper sur quatre éléments de batterie : j'aurai donc besoin de huit servomoteurs.
 
-   <img src="docs/robobatteur_bb.jpg"/>
+   #+html: <img src="docs/robobatteur_bb.jpg" />
    
 ** Menuiserie, disposition
    Principe général. Tout sur un socle, qu'on peut lester avec des parpaings. La disposition reprend celle d'une batterie jouée par un humain, à savoir grosse caisse au milieu, et charleston et caisse claire de part et d'autre.
