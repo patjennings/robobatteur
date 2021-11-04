@@ -58,13 +58,13 @@ Note MIDI -------------------------------------------------> routage / instructi
 
     Comment les télécharger ? Le plus simple est d'utiliser l'IDE Arduino, est d'installer les modules via le menu ~Menu~.
 
-    #+html: <img src="docs/lib-install.png" width="100%"/>
+    #+html: <img src="docs/lib-install.png"/>
 
     La librairie ~MIDI~
-    #+html: <img src="docs/lib-midi.png" width="100%"/>
+    #+html: <img src="docs/lib-midi.png"/>
 
     La librairie ~Servo~
-    #+html: <img src="docs/lib-servo.png" width="100%"/>
+    #+html: <img src="docs/lib-servo.png"/>
     
     Une fois installées, on appelle les librairies dans le code :
 
