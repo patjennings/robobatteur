@@ -29,7 +29,7 @@ Note MIDI -------------------------------------------------> routage / instructi
 ** Circuit
    Plusieurs besoins pour le circuit :
    - un midi in
-   - une alimentation par groupe de servos dédiés (les servos ont besoin chacun d'une intensité d'un ampère pour fonctionner correctement. Comme il est difficile de se procurer du 5v 6a, pour pallier à cela, on n'alimente que deux moteurs avec une seule alim 5v à 2a).
+   - une alimentation par groupe de servos dédiés (les servos ont besoin chacun d'une intensité d'un ampère pour fonctionner correctement. Comme il est difficile de se procurer du 5V 8A, pour pallier à cela, on n'alimente que deux moteurs avec une seule alim 5v à 2a).
 
    J'ai utilisé une perfboard pour le circuit du module de MIDI In et pour le câblage des servo moteurs, et une autre board pour les circuits d'alim des servos. J'ai fait ça à mesure que j'avancais, j'imagine qu'il y a moyen d'optimiser ça.
 
@@ -50,11 +50,29 @@ Note MIDI -------------------------------------------------> routage / instructi
    Les câbles sont fixés. C'est encore à l'état de prototype "early", et la robustesse de connexions est le prochain point que je compte améliorer.
    
 ** Code
-   Le code est relativement simple. Les variables sur lesquelles on jouera en fonction du montage sont dans initPos[]. L'angle de rotation de chaque baguette est défini par rotationAngle. On pourra peut-être jouer avec. J'ai peu testé, mais on gagne peut-être en puissance.
+   Le code est relativement simple. Les variables sur lesquelles on jouera en fonction du montage sont dans initPos[]. L'angle de rotation de chaque baguette est défini par rotationAngle. On pourra peut-être jouer avec. J'ai peu testé, mais on gagne peut-être en puissance. Le code se répète pas mal, et il pourrait aisément être factorisé. Cela est dû à mes compétences limitées. Malgré tout, le code est sûrement plus lisible pour des novices qui tâcheraient de comprendre ce qui se passe.
 
-   Le programme s'appuie sur les librairies Servo (lien) et MIDI (lien). Comment les télécharger ?
+   
+*** Librairies externes
+    Le programme s'appuie sur les librairies ~MIDI~ et ~Servo~.
 
-   Le code se répète pas mal, et il pourrait aisément être factorisé. Cela est dû à mes compétences limitées. Malgré tout, le code est sûrement plus lisible pour des novices qui tâcheraient de comprendre ce qui se passe.
+    Comment les télécharger ? Le plus simple est d'utiliser l'IDE Arduino, est d'installer les modules via le menu ~Menu~.
+
+    #+html: <img src="docs/lib-install.png" width="100%"/>
+
+    La librairie ~MIDI~
+    #+html: <img src="docs/lib-midi.png" width="100%"/>
+
+    La librairie ~Servo~
+    #+html: <img src="docs/lib-servo.png" width="100%"/>
+    
+    Une fois installées, on appelle les librairies dans le code :
+
+    #+begin_src c
+     #include <MIDI.h>  // Add Midi Library
+     #include <Servo.h> // Add servo lib
+    #+end_src
+
    
 ** Fichiers MIDI
    Les fichiers MIDI sont créés avec Rosegarden. J'ai pu tester avec des (croches, doubles-croches) à un tempo de (combien) ?
@@ -74,9 +92,9 @@ Note MIDI -------------------------------------------------> routage / instructi
      sudo apt-get install -y qjackctl a2jmidid rosegarden
    #+end_src
    
-   Une carte son (Presonus Audibox44VSL pour ma part) est connectée en USB à l'ordinateur.
+   Une carte son (/Presonus Audibox44VSL/ pour ma part) est connectée en USB à l'ordinateur.
    
-   Ensuite, QJackCtl est démarré. Si tout roule, on peut lancer a2jmidid, en ligne de commande
+   Ensuite, ~QJackCtl~ est démarré. Si tout roule, on peut lancer ~a2jmidid~
 
    #+begin_src bash
      a2jmidid -e
@@ -84,19 +102,20 @@ Note MIDI -------------------------------------------------> routage / instructi
 
    Si tout fonctionne, on doit voir quelque chose comme ça
 
+   #+begin_src bash
    Retour terminal
+   #+end_src
 
-   Puis on peut démarrer Rosegarden
+   Puis on peut démarrer ~Rosegarden~
 
-   Une fois que tout est démarré, on revient dans les connexions de Qjack pour vérifier que RoseGarden envoie des messages vers le midi out de la carte son (grâce à a2jmidid)
+   Une fois que tout est démarré, on revient dans les connexions de ~Qjack~ pour vérifier que ~RoseGarden~ envoie des messages vers le midi out de la carte son (grâce à ~a2jmidid~)
 
-   Si tout fonctionne correctement, une note lue sur Rosegarden doit activer les servo moteurs
+   Si tout fonctionne correctement, une note lue sur ~Rosegarden~ doit activer les servo moteurs
 
 ** Améliorer
    Précision des fixations  : angle de fixation des baguettes et des servos aléatoires, ce qui nuit à l'exactitude du tempo (rubato).
    
 ** Matériel
-
 - Assortiment de fils : <https://www.lextronic.fr/assortiment-fils-de-cablage-monobrin-30m-62595.html>
 - Perfboard : <https://www.lextronic.fr/plaque-a-pastilles-cuivrees-81x51-mm-31761.html>
 - Condensateur 100 µF <https://www.lextronic.fr/condensateur-chimique-radial-1000uf-35v-58165.html#/condensateurs_85-100f_10v>
