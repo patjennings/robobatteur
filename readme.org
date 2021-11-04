@@ -75,17 +75,19 @@ Note MIDI -------------------------------------------------> routage / instructi
 
    
 ** Fichiers MIDI
-   Les fichiers MIDI sont créés avec Rosegarden. J'ai pu tester avec des (croches, doubles-croches) à un tempo de (combien) ?
+   Les fichiers MIDI sont créés avec ~Rosegarden~. J'ai pu tester avec des (croches, doubles-croches) à un tempo de (combien) ?
    
 ** Setup informatique
-   QJackCtl + a2jmidid + Rosegarden
+   ~QJackCtl~ + ~a2jmidid~ + ~Rosegarden~
 
    J'utilise Linux Mint. Le setup sera à adapter en fonction de l'OS, et sera sûrement plus simple dans d'autres environnements. Quoi qu'il en soit, voici le mien :
 
    Les applications utilisées sont :
-   - QJackCtl pour piloter la carte son et effectuer les connexions
-   - a2jmidid pour envoyer des messages MIDI via la carte son
-   - Rosegarden pour créer et lire les fichiers MIDI
+   - ~QJackCtl~ pour piloter la carte son et effectuer les connexions
+   - ~a2jmidid~ pour envoyer des messages MIDI via la carte son
+   - ~Rosegarden~ pour créer et lire les fichiers MIDI
+
+   Rosegarden ferta tourner les séquences midi, et enverra les notes vers la carte son via ~QJackCtl~ et ~a2jmidid~ (qui permet à ~QJackCtl~ de piloter les connexions midi).
 
    #+begin_src bash
      sudo apt-get update
