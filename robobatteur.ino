@@ -3,7 +3,7 @@
 
 #define LED 13    // Arduino Board LED is on Pin 13
 Servo srvKick1, srvKick2, srvSnare1, srvSnare2, srvHh1, srvHh2, srvRide1, srvRide2;  // on crée les servos
-int initPos[] = {160, 160, 95, 101, 45, 43, 85, 85}; // position initiale des servos, dans l'ordre de déclaration présent ci-avant
+int initPos[] = {150, 153, 170, 170, 180, 178, 168, 170}; // position initiale des servos, dans l'ordre de déclaration présent ci-avant
 
 int rotationAngle = 45; // coefficient de rotation
 
@@ -59,30 +59,36 @@ void MyHandleNoteOn(byte channel, byte pitch, byte velocity) {
   digitalWrite(LED,HIGH);
   Serial.write("midi spotted");
 
-  int rotAng = map(velocity, 0, 127, 35, 45);
+  // int rotAng = map(velocity, 0, 127, 35, 45);
+  int rotAng = 45;
 
-  // c'est ici qu'on décide querlle note active quel moteur
-  if(pitch == 36){  // DO 1
-    hitKick();
-  }
-  if(pitch == 38){  // RE 1
-    hitSnare(rotAng);
-  }
-  if(pitch == 42){  // FA#1
-    hitHH();
-  }
-  if(pitch == 43){ // SOL 1
-    hitRide();
-  }
+  // c'est ici qu'on décide quelle note active quel moteur
+//  if(pitch == 36){  // DO 1
+//    hitKick(rotAng);
+//  }
+//  if(pitch == 38){  // RE 1
+//    hitSnare(rotAng);
+//  }
+//  if(pitch == 42){  // FA#1
+//    hitHH(rotAng);
+//  }
+//  if(pitch == 43){ // SOL 1
+//    hitRide(rotAng);
+//  }
+
+  if(channel == 9){ hitKick(rotAng); }
+  if(channel == 10){ hitSnare(rotAng); }
+  if(channel == 13){ hitHH(rotAng); }
+  if(channel == 14){ hitRide(rotAng); }
 }
-void hitKick(){
+void hitKick(int ra){
   if(toggleKick == true){
-    srvKick1.write(initPos[0]-rotationAngle); // la baguette s'abaisse
+    srvKick1.write(initPos[0]-ra); // la baguette s'abaisse
     delay(40);
     srvKick1.write(initPos[0]);  // la baguette se relève
     toggleKick = false;
   } else {
-    srvKick2.write(initPos[1]-rotationAngle); // la baguette s'abaisse
+    srvKick2.write(initPos[1]-ra); // la baguette s'abaisse
     delay(40);
     srvKick2.write(initPos[1]);  // la baguette se relève
     toggleKick = true;
@@ -91,39 +97,39 @@ void hitKick(){
 }
 void hitSnare(int ra){
   if(toggleSnare == true){
-    srvSnare1.write(initPos[2]+ra); // la baguette s'abaisse
+    srvSnare1.write(initPos[2]-rotationAngle); // la baguette s'abaisse
     delay(40);
     srvSnare1.write(initPos[2]);  // la baguette se relève
     toggleSnare = false;
   } 
   else {
-    srvSnare2.write(initPos[3]+ra); // la baguette s'abaisse
+    srvSnare2.write(initPos[3]-rotationAngle); // la baguette s'abaisse
     delay(40);
     srvSnare2.write(initPos[3]);  // la baguette se relève
     toggleSnare = true;
   }
 }
-void hitHH(){
+void hitHH(int ra){
   if(toggleHH == true){
-    srvHh1.write(initPos[4]+rotationAngle); // la baguette s'abaisse
+    srvHh1.write(initPos[4]-ra); // la baguette s'abaisse
     delay(40);
     srvHh1.write(initPos[4]);  // la baguette se relève
     toggleHH = false;
   } else {
-    srvHh2.write(initPos[5]+rotationAngle); // la baguette s'abaisse
+    srvHh2.write(initPos[5]-ra); // la baguette s'abaisse
     delay(40);
     srvHh2.write(initPos[5]);  // la baguette se relève
     toggleHH = true;
   }
 }
-void hitRide(){
+void hitRide(int ra){
   if(toggleRide == true){
-    srvRide1.write(initPos[4]+rotationAngle); // la baguette s'abaisse
+    srvRide1.write(initPos[4]-ra); // la baguette s'abaisse
     delay(40);
     srvRide1.write(initPos[4]);  // la baguette se relève
     toggleRide = false;
   } else {
-    srvRide2.write(initPos[5]+rotationAngle); // la baguette s'abaisse
+    srvRide2.write(initPos[5]-ra); // la baguette s'abaisse
     delay(40);
     srvRide2.write(initPos[5]);  // la baguette se relève
     toggleRide = true;
